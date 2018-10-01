@@ -1,6 +1,9 @@
+import { Expense } from './../models/Expense';
+import { AddExpenseDto } from './../dto/add-expense.dto';
 import { MonthOverView } from './../models/MonthOverview';
 import { Injectable, HttpService } from '@nestjs/common';
 import * as Cloudant from '@cloudant/cloudant';
+import * as moment from 'moment';
 
 @Injectable()
 export class CloudantService {
@@ -31,4 +34,21 @@ export class CloudantService {
         let doc = await this.db.get('2018-08');
         return doc;
     }
+
+    public async addExpense(addExpenseDto: AddExpenseDto): Promise<void>
+    {
+        let now = moment().format('YYYY-MM');
+        let doc = await this.db.get(now);
+        let monthOverview = new MonthOverView(doc._id, doc.accounts, doc.categories, doc._rev, doc.usedTags);
+        let account = monthOverview.getAccByName(addExpenseDto.usedAccountName);
+        account.updateFinalBalance('decrease', addExpenseDto.cost);
+        let category = monthOverview.getCategoryByName(addExpenseDto.categoryName);
+        let expense = new Expense(addExpenseDto.cost, addExpenseDto.description, now, addExpenseDto.usedAccountName, addExpenseDto.categoryName, category.getIconName());
+        category.addExpense(expense);
+        let budget = category.getBudget();
+        budget.addToAmountSpentInBudget(expense.getCost()); 
+        monthOverview.addTagsToUsedTags(expense.getTags());
+        this.db.insert(monthOverview);
+    }
+
 }
