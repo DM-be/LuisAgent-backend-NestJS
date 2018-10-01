@@ -51,4 +51,12 @@ export class CloudantService {
         this.db.insert(monthOverview);
     }
 
+    public async getBalance(accountName: string): Promise<number>
+    {
+        let now = moment().format('YYYY-MM');
+        let doc = await this.db.get(now);
+        let monthOverview = new MonthOverView(doc._id, doc.accounts, doc.categories, doc._rev, doc.usedTags);
+        return monthOverview.getAccByName(accountName).getFinalBalance();
+    }
+
 }
