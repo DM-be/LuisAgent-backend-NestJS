@@ -22,7 +22,7 @@
     "foreman": "foreman start -f Procfile.dev",
     "migrations:generate": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:generate",
     "migrations:run": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:run",
-    "migrations:revert": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:revert",
+    "migrations:revert": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:revert"
   },
   "dependencies": {
     "@cloudant/cloudant": "^2.4.0",
