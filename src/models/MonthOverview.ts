@@ -60,7 +60,7 @@ export class MonthOverView {
 
     public getAccByName(accountName: string): Account
     {
-        return this.accounts.find(account => account.getAccountName() === accountName);
+        return this.accounts.find(account => account.getAccountName().toLowerCase() === accountName.toLowerCase());
     
     }
 
