@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
     "prestart:prod": "rimraf dist && tsc",
@@ -16,13 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "webpack": "webpack --config webpack.config.js",
-    "start": "node index.js",
-    "start:watch": "nodemon",
-    "foreman": "foreman start -f Procfile.dev",
-    "migrations:generate": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:generate",
-    "migrations:run": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:run",
-    "migrations:revert": "node_modules/ts-node/dist/bin.js node_modules/.bin/typeorm migrations:revert"
+    "webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "@cloudant/cloudant": "^2.4.0",
@@ -32,7 +27,6 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.2",
     "typescript": "^3.0.1"
-    
   },
   "devDependencies": {
     "@nestjs/testing": "^5.1.0",
