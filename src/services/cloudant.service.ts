@@ -1,3 +1,4 @@
+import { Budget } from './../models/Budget';
 import { Expense } from './../models/Expense';
 import { AddExpenseDto } from './../dto/add-expense.dto';
 import { MonthOverView } from './../models/MonthOverview';
@@ -39,6 +40,20 @@ export class CloudantService {
         let now = moment().format('YYYY-MM');
         let doc = await this.db.get(now);
         return doc.accounts.map(acc => acc.accountName.toLowerCase());
+    }
+
+    public async getBudgetNames(): Promise<string []> {
+        let now = moment().format('YYYY-MM');
+        let doc = await this.db.get(now);
+        let monthOverview = new MonthOverView(doc._id, doc.accounts, doc.categories, doc._rev, doc.usedTags);
+        return monthOverview.getCategoriesWithABudget().map(cat => cat.getCategoryName().toLowerCase());
+    }
+
+    public async getBudget(categoryName: string): Promise<Budget> {
+        let now = moment().format('YYYY-MM');
+        let doc = await this.db.get(now);
+        let monthOverview = new MonthOverView(doc._id, doc.accounts, doc.categories, doc._rev, doc.usedTags);
+        return monthOverview.getCategoryByName(categoryName).getBudget();
     }
 
     public async addExpense(addExpenseDto: AddExpenseDto): Promise<void>

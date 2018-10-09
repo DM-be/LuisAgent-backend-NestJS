@@ -133,6 +133,12 @@ export class MonthOverView {
         return this.categories;
     }
 
+    public getCategoriesWithABudget(): Category [] {
+        return this.categories.filter((cat) => {
+            cat.budget.isBeingTracked();
+        })
+    }
+
     public getTotalAmountSpent(): number {
         let totalAmountSpent = 0;
         this.categories.forEach(category => {

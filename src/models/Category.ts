@@ -81,7 +81,6 @@ export class Category {
             } 
         
         )
-        console.log(i);
         this.expenses.splice(i, 1);
       }
 
