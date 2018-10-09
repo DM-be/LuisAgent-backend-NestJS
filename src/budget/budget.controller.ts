@@ -1,6 +1,8 @@
+import { CloudantService } from './../services/cloudant.service';
+
 import { Budget } from './../models/Budget';
 import { Controller, Get, Param } from '@nestjs/common';
-import { CloudantService } from 'services/cloudant.service';
+
 
 @Controller('budget')
 export class BudgetController {
