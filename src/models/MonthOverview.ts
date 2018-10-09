@@ -135,7 +135,7 @@ export class MonthOverView {
 
     public getCategoriesWithABudget(): Category [] {
         return this.categories.filter((cat) => {
-            cat.budget.isBeingTracked();
+            return cat.budget.isBeingTracked();
         })
     }
 
