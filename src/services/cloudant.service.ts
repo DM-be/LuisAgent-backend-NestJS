@@ -38,7 +38,7 @@ export class CloudantService {
     public async getAccountNames(): Promise<string []> {
         let now = moment().format('YYYY-MM');
         let doc = await this.db.get(now);
-        return doc.accounts.map(acc => acc.accountName);
+        return doc.accounts.map(acc => acc.accountName.toLowerCase());
     }
 
     public async addExpense(addExpenseDto: AddExpenseDto): Promise<void>
