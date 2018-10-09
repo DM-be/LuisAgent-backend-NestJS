@@ -42,7 +42,7 @@ export class CloudantService {
         return doc.accounts.map(acc => acc.accountName.toLowerCase());
     }
 
-    public async getBudgetNames(): Promise<string []> {
+    public async getCategoriesWithABudgetNames(): Promise<string []> {
         let now = moment().format('YYYY-MM');
         let doc = await this.db.get(now);
         let monthOverview = new MonthOverView(doc._id, doc.accounts, doc.categories, doc._rev, doc.usedTags);

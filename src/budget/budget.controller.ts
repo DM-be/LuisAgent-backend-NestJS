@@ -8,7 +8,7 @@ export class BudgetController {
     }
     @Get()
     async getBudgetNames(): Promise<string []> {
-        return this.cloudantService.getBudgetNames();
+        return this.cloudantService.getCategoriesWithABudgetNames();
     }
 
     @Get(':categoryName')
@@ -17,4 +17,3 @@ export class BudgetController {
     }
 
 }
-    
