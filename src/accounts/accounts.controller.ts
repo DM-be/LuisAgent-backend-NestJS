@@ -12,5 +12,11 @@ export class AccountsController {
     async getBalance(@Param('accountName') accountName ): Promise<number> {
         return this.cloudantService.getBalance(accountName);
     }
+
+    @Get()
+    async getAccountNames(): Promise<string []> {
+        return this.cloudantService.getAccountNames();
+    }
+
 }
 
